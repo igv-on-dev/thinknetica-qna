@@ -1,0 +1,23 @@
+AllCops:
+  Include:
+    - 'app/**/*.rb'
+    - 'config/**/*.rb'
+    - 'lib/**/*.rb'
+    - 'lib/**/*.rake'
+  Exclude:
+    - 'vendor/**/*'
+    - 'spec/**/*'
+    - 'db/**/*'
+    - 'bin/**/*'
+  DisplayCopNames: true
+  StyleGuideCopsOnly: true
+
+Rails:
+  Enabled: true
+
+Metrics/LineLength:
+  Max: 100
+  Exclude:
+    - 'config/initializers/backtrace_silencers.rb'
+    - 'config/environments/production.rb'
+
