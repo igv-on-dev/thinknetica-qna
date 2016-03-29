@@ -1,0 +1,8 @@
+en:
+  questions:
+    index:
+      ask_question: Ask Question
+    new:
+      create: Create!
+  question:
+    created: Your question successfully created
