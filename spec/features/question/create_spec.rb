@@ -11,12 +11,12 @@ feature 'Create question', %q{
     sign_in(user)
 
     visit questions_path
-    click_on I18n.t('questions.index.ask_question')
+    click_on t('questions.index.ask_question')
     fill_in 'Title', with: 'Test question'
     fill_in 'Body', with: 'Body of test question'
-    click_on I18n.t('questions.new.create')
+    click_on t('questions.new.create')
 
-    expect(page).to have_content I18n.t('question.created')
+    expect(page).to have_content t('question.created')
     expect(page).to have_content 'Test question'
     expect(page).to have_content 'Body of test question'
   end
@@ -24,8 +24,8 @@ feature 'Create question', %q{
 
   scenario 'Non-authenticated user tries to create question' do
     visit questions_path
-    click_on I18n.t('questions.index.ask_question')
+    click_on t('questions.index.ask_question')
 
-    expect(page).to have_content I18n.t('devise.failure.unauthenticated')
+    expect(page).to have_content t('devise.failure.unauthenticated')
   end
 end
