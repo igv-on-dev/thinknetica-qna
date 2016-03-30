@@ -20,7 +20,7 @@ feature 'User sign in', %q{
     fill_in 'Email', with: 'wrong@test.com'
     fill_in 'Password', with: '12345678'
 
-    click_on t('devise.sessions.new.sign_in')
+    click_button t('devise.sessions.new.sign_in')
 
     expect(page).to have_content t('devise.failure.not_found_in_database', authentication_keys:'email')
     expect(current_path).to eq new_user_session_path
