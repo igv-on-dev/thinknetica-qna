@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 feature 'User sign out', %q{
-        In order to be able to finish session
-        As an authenticated user
-        I want to be able to sign out
+  In order to be able to finish session
+  As an authenticated user
+  I want to be able to sign out
 } do
   given(:user) { create(:user) }
 
