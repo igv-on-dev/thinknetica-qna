@@ -1,1 +1,5 @@
 p= link_to t('.ask_question'), new_question_path
+
+- @questions.each do |question|
+  =link_to question.title, question_path(question)
+  =truncate(question.body, :length => 256, :separator => ' ')
