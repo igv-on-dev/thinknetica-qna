@@ -17,7 +17,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new(question_params)
+    @question = Question.new(question_params.merge(user: current_user))
     if @question.save
       flash[:notice] = I18n.t('question.created')
       redirect_to @question
@@ -35,6 +35,10 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
+    if current_user.id != @question.user_id
+      render nothing: true, status: :forbidden
+      return
+    end
     @question.destroy
     redirect_to questions_path
   end

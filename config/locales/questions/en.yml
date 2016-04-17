@@ -7,5 +7,6 @@ en:
     show:
       no_answers_yet: No aswers yet
       add_answer: Add answer
+      delete_answer: Delete this answer
   question:
     created: Your question successfully created

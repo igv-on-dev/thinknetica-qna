@@ -139,17 +139,33 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    sign_in_user
+    context 'authenticated user' do
+      sign_in_user
 
-    before { question }
+      let!(:question) { create(:question, user: @user) }
+      let!(:another_user_question) { create(:question) }
 
-    it 'deletes question' do
-      expect { delete :destroy, id: question }.to change(Question, :count).by(-1)
-    end
+      context 'current_user is author of the question' do
+        it 'deletes question of right user' do
+          expect{ delete :destroy, id: question }.to change(@user.questions, :count).by(-1)
+        end
 
-    it 'redirects to index view' do
-      delete :destroy, id: question
-      expect(response).to redirect_to questions_path
+        it 'redirects to index view' do
+          delete :destroy, id: question
+          expect(response).to redirect_to questions_path
+        end
+      end
+
+      context 'current_user is not author of the question' do
+        it 'does not delete question' do
+          expect{ delete :destroy, id: another_user_question }.to_not change(Question, :count)
+        end
+
+        it 'renders error 403' do
+          delete :destroy, id: another_user_question
+          expect(response).to have_http_status(:forbidden)
+        end
+      end
     end
   end
 end

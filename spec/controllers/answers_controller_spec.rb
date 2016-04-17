@@ -63,4 +63,37 @@ RSpec.describe AnswersController, type: :controller do
       end
     end
   end
+
+  describe 'DELETE #destroy' do
+    sign_in_user
+
+    let!(:answer) { create(:answer, question: question, user: @user) }
+    let!(:another_user_answer) { create(:answer, question: question) }
+
+    context 'current_user is author of answer' do
+      it 'deletes answer of right question' do
+        expect{ delete :destroy, id: answer }.to change(question.answers, :count).by(-1)
+      end
+
+      it 'deletes answer of right user' do
+        expect{ delete :destroy, id: answer }.to change(@user.answers, :count).by(-1)
+      end
+
+      it 'redirects to question view' do
+        delete :destroy, id: answer
+        expect(response).to redirect_to question
+      end
+    end
+
+    context 'current_user is not author of answer' do
+      it 'does not delete answer' do
+        expect{ delete :destroy, id: another_user_answer }.to_not change(Answer, :count)
+      end
+
+      it 'renders error 403' do
+        delete :destroy, id: another_user_answer
+        expect(response).to have_http_status(:forbidden)
+      end
+    end
+  end
 end
