@@ -2,3 +2,9 @@
   = @question.title
 #body
   = @question.body
+
+- if @question.answers.any?
+  - @question.answers.each do |answer|
+    = answer.body
+- else
+  = t('.no_answers_yet')

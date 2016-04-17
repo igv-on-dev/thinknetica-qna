@@ -4,5 +4,7 @@ en:
       ask_question: Ask Question
     new:
       create: Create!
+    show:
+      no_answers_yet: No aswers yet
   question:
     created: Your question successfully created
