@@ -24,8 +24,7 @@ feature 'Create question', %q{
 
   scenario 'Non-authenticated user tries to create question' do
     visit questions_path
-    click_on t('questions.index.ask_question')
 
-    expect(page).to have_content t('devise.failure.unauthenticated')
+    expect(page).to_not have_link t('questions.index.ask_question')
   end
 end

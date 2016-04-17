@@ -4,7 +4,12 @@
   = @question.body
 
 - if @question.answers.any?
+  .answers
   - @question.answers.each do |answer|
-    = answer.body
+    div id="answer-#{answer.id}"
+      = answer.body
 - else
   = t('.no_answers_yet')
+
+- if user_signed_in?
+  p =link_to t('.add_answer'), new_question_answer_path(question_id: @question)

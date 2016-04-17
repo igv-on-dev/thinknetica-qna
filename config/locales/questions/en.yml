@@ -6,5 +6,6 @@ en:
       create: Create!
     show:
       no_answers_yet: No aswers yet
+      add_answer: Add answer
   question:
     created: Your question successfully created
