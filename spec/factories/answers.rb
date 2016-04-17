@@ -1,7 +1,8 @@
 FactoryGirl.define do
   factory :answer do
     body 'MyText'
-    question nil
+    question
+    user
 
     trait :without_body do
       body nil

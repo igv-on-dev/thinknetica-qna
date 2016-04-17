@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :question do
     title 'MyString'
     body 'MyText'
+    user
 
     trait :without_title do
       title nil
