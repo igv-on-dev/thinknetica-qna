@@ -3,6 +3,9 @@
 #body
   = @question.body
 
+- if user_signed_in? && current_user.author_of?(@question)
+  p = link_to t('.delete_question'), @question, id: "delete_question_#{ @question.id }", method: :delete
+
 - if @question.answers.any?
   .answers
   - @question.answers.each do |answer|

@@ -8,6 +8,7 @@ en:
       no_answers_yet: No aswers yet
       add_answer: Add answer
       delete_answer: Delete this answer
+      delete_question: Delete this question
   question:
     created: Your question created successfully
     deleted: Your question deleted successfully
