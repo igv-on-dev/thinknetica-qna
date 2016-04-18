@@ -12,8 +12,6 @@ feature 'Create answer', %q{
   scenario 'Authenticated user answers question' do
     sign_in(user)
     visit question_path(question)
-    click_on t('questions.show.add_answer')
-    expect(current_path).to eq new_question_answer_path(question)
 
     fill_in t('answers.new.your_answer'), with: text_for_answer
     click_on t('answers.new.save')

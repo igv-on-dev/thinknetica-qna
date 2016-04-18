@@ -3,18 +3,17 @@
 #body
   = @question.body
 
-- if user_signed_in? && current_user.author_of?(@question)
-  p = link_to t('.delete_question'), @question, id: "delete_question_#{ @question.id }", method: :delete
+- if user_signed_in?
+  - if current_user.author_of?(@question)
+    p = link_to t('.delete_question'), @question, id: "delete_question_#{ @question.id }", method: :delete
+  = render 'answers/form'
 
-- if @question.answers.any?
+- if @answers.any?
   .answers
-  - @question.answers.each do |answer|
+  - @answers.each do |answer|
     div id="answer-#{answer.id}"
       = answer.body
       - if user_signed_in? && current_user.author_of?(answer)
         p = link_to t('.delete_answer'), answer, id: "delete_answer_#{ answer.id }", method: :delete
 - else
   = t('.no_answers_yet')
-
-- if user_signed_in?
-  p =link_to t('.add_answer'), new_question_answer_path(question_id: @question)

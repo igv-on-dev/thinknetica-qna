@@ -1,0 +1,4 @@
+= form_for [@question, @answer] do |f|
+  = f.label :body, t('answers.new.your_answer')
+  = f.text_area :body
+  = f.submit t('answers.new.save')
