@@ -9,4 +9,5 @@ en:
       add_answer: Add answer
       delete_answer: Delete this answer
   question:
-    created: Your question successfully created
+    created: Your question created successfully
+    deleted: Your question deleted successfully

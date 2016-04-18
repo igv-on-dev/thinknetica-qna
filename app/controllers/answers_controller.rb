@@ -9,8 +9,7 @@ class AnswersController < ApplicationController
   def create
     @answer = @question.answers.new(answers_params.merge(user: current_user))
     if @answer.save
-      flash[:notice] = t('answer.created')
-      redirect_to question_path(@question)
+      redirect_to question_path(@question), notice: t('answer.created')
     else
       render :new
     end
@@ -19,13 +18,13 @@ class AnswersController < ApplicationController
   def destroy
     @answer = Answer.includes(:question).find(params[:id])
     @question = @answer.question
-    if current_user.id != @answer.user_id
-      render nothing: true, status: :forbidden
-      return
+
+    if current_user.author_of?(@answer)
+      @answer.destroy
+      redirect_to @question, notice: t('answer.deleted')
+    else
+      head :forbidden
     end
-    @answer.destroy
-    flash[:notice] = t('answer.deleted')
-    redirect_to @question
   end
 
   private

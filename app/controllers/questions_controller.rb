@@ -35,12 +35,12 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    if current_user.id != @question.user_id
-      render nothing: true, status: :forbidden
-      return
+    if current_user.author_of?(@question)
+      @question.destroy
+      redirect_to questions_path, notice: t('question.deleted')
+    else
+      head :forbidden
     end
-    @question.destroy
-    redirect_to questions_path
   end
 
   private

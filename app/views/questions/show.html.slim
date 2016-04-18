@@ -8,8 +8,8 @@
   - @question.answers.each do |answer|
     div id="answer-#{answer.id}"
       = answer.body
-      - if user_signed_in? && current_user.id == answer.user_id
-        p = link_to t('.delete_answer'), answer_path(answer), id: "delete_answer_#{ answer.id }", method: :delete
+      - if user_signed_in? && current_user.author_of?(answer)
+        p = link_to t('.delete_answer'), answer, id: "delete_answer_#{ answer.id }", method: :delete
 - else
   = t('.no_answers_yet')
 

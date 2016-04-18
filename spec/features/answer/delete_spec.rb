@@ -19,7 +19,7 @@ feature 'Delete answer', %q{
 
     click_on "delete_answer_#{ target.id }"
     expect(current_path).to eq question_path(question)
-    expect(page).to have_content I18n.t('answer.deleted')
+    expect(page).to have_content t('answer.deleted')
     expect(page).to_not have_content target.body
   end
 
