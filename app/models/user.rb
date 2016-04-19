@@ -8,6 +8,6 @@ class User < ActiveRecord::Base
   has_many :questions, dependent: :destroy
 
   def author_of?(item)
-    item.class.in?([Answer, Question]) && self.persisted? && item.user_id == self.id
+    item.try(:user_id) == id
   end
 end
