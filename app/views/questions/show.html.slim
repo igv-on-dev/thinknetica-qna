@@ -1,0 +1,19 @@
+#title
+  = @question.title
+#body
+  = @question.body
+
+- if user_signed_in?
+  - if current_user.author_of?(@question)
+    p = link_to t('.delete_question'), @question, id: "delete_question_#{ @question.id }", method: :delete
+  = render 'answers/form'
+
+- if @answers.any?
+  .answers
+  - @answers.each do |answer|
+    div id="answer-#{answer.id}"
+      = answer.body
+      - if user_signed_in? && current_user.author_of?(answer)
+        p = link_to t('.delete_answer'), answer, id: "delete_answer_#{ answer.id }", method: :delete
+- else
+  = t('.no_answers_yet')
